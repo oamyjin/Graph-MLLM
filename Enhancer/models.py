@@ -116,8 +116,6 @@ class GCN(nn.Module):
         pin_memory = buffer_device != device
 
         for l, layer in enumerate(self.layers):
-            # print("g.num_nodes():", g.num_nodes())
-            # print("self.hid_size if l != len(self.layers) - 1 else self.out_size:", self.hid_size if l != len(self.layers) - 1 else self.out_size)
             y = torch.empty(
                 g.num_nodes(),
                 self.hid_size if l != len(self.layers) - 1 else self.out_size,

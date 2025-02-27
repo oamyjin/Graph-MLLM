@@ -17,7 +17,7 @@ from dgl.nn import GATv2Conv
 import hydra
 import logging
 from omegaconf import DictConfig, OmegaConf
-from models import SAGE, GCN, MLP, MMGCN
+from models import SAGE, GCN, MLP
 
 PROJETC_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), './')
 CONFIG_DIR = os.path.join(PROJETC_DIR, "configs")
@@ -210,18 +210,14 @@ def main(cfg: DictConfig):
     print("model_name:", cfg.model_name)
 
     # load and preprocess dataset
-    # device = torch.device('cpu' if cfg.mode == 'cpu' else 'cuda')
-
-    # load and preprocess dataset
     log.info("Loading data")
-
-    data_path = '/scratch/jl11523/projects/mm-graph-benchmark/mm-graph/' # replace this with the path where you save the datasets
-    dataset_name = cfg.dataset #'ele-fashion' # jiajin modified
+    data_path = './dataset/' # replace this with the path where you save the datasets
+    dataset_name = cfg.dataset 
     print("dataset_name:", dataset_name)
     feature_path = data_path + dataset_name
-    feat_name = cfg.feat #'t5vit' jiajin modified
+    feat_name = cfg.feat 
     verbose = True
-    device = torch.device('cpu')#'cpu' # use 'cuda' if GPU is available
+    device = torch.device('cpu') #'cpu' # use 'cuda' if GPU is available
 
     # BOOKS_PATH = os.path.join(data_path, dataset_name) # Jiajin added
 
@@ -234,24 +230,7 @@ def main(cfg: DictConfig):
 
     g = dataset.graph
     labels = dataset.labels
-    # if cfg.feat == 'clip':
-    #     # check if os.path.join(feature_path, 'clip_feat.pt') exits
-    #     if os.path.exists(os.path.join(feature_path, 'clip_feat.pt')):
-    #         clip_feat = torch.load(os.path.join(feature_path, 'clip_feat.pt'))
-    #     else:
-    #         clip_feat = torch.load(os.path.join(feature_path, 'cliptextimage_x.pt'))
-    # elif cfg.feat == 'clipimage':
-    #     clip_feat = torch.load(os.path.join(feature_path, 'clipimage_feat.pt'))
-    # elif cfg.feat == 'cliptext':
-    #     clip_feat = torch.load(os.path.join(feature_path, 'cliptext_feat.pt'))
-    # elif cfg.feat == 'imagebind':
-    #     clip_feat = torch.load(os.path.join(feature_path, 'imagebind_feat.pt'))
-    # elif cfg.feat == 'imagebindimage':
-    #     clip_feat = torch.load(os.path.join(feature_path, 'imagebindimage_feat.pt'))
-    # elif cfg.feat == 'dino':
-    #     clip_feat = torch.load(os.path.join(feature_path, 't5dino_feat.pt'))
-    # elif cfg.feat == 't5vit': 
-    #     clip_feat = torch.load(os.path.join(feature_path, 't5vit_feat.pt'))
+
     feat_path = os.path.join(feature_path, f'{cfg.feat}_feat.pt')
     if os.path.exists(feat_path):
         clip_feat = torch.load(feat_path)
@@ -260,36 +239,29 @@ def main(cfg: DictConfig):
         print(f"feat_path: {feat_path} does not exist.")
         return
 
-    # if cfg.use_feature == 'text':
-    #     clip_feat = clip_feat[:,:768] 
-    # clip_feat = clip_feat.to('cuda:0')   
+  
     g.ndata['feat'] = clip_feat.to('cpu')
     g.ndata['label'] = labels
     g = dgl.remove_self_loop(g)
     g, reverse_eids = to_bidirected_with_reverse_mapping(g)
     g = g.to("cuda" if cfg.mode == "puregpu" else "cpu")
-    if cfg.dataset == 'books-nc': #'books': # jiajin modified
-        print("using books")
-        num_classes = len(torch.unique(labels))
-    else:
-        labels_pt_data = torch.load(os.path.join(feature_path, "labels-w-missing.pt"))
-        num_classes = len(set(labels_pt_data))
-        print("num_classes:", num_classes)
-    # else:
-    #     num_classes = 12
+    
+    labels_pt_data = torch.load(os.path.join(feature_path, "labels-w-missing.pt"))
+    num_classes = len(set(labels_pt_data))
+    print("num_classes:", num_classes)\
         
     # change device to gpu
     device = torch.device('cpu' if cfg.mode == 'cpu' else 'cuda')
     
+    # load dataset splits
     with_zero_splits = torch.load(os.path.join(feature_path, 'split.pt'))
-    
     splits ={}         
     splits['train_idx'] = with_zero_splits['train_idx']
     splits['val_idx'] = with_zero_splits['val_idx']
     splits['test_idx'] = with_zero_splits['test_idx']
-    # splits_gpu = {key: value.to(device) for key, value in splits.items()}
+
+    # model initialization
     num_nodes = g.num_nodes()
-    # create GraphSAGE model
     in_size = g.ndata["feat"].shape[1]
     out_size = num_classes
     accs = []
@@ -302,15 +274,14 @@ def main(cfg: DictConfig):
             if cfg.add_self_loop:
                 g = dgl.add_self_loop(g)
         elif cfg.model_name == "MLP":
-            model = MLP(in_size, cfg.hidden_dim, out_size, 1).to(device) # original: cfg.num_layers=3
-        elif cfg.model_name == "MMGCN":
-            model = MMGCN(in_size, 64, out_size, cfg.num_layers, num_nodes).to(device)          
-        # # model training
+            model = MLP(in_size, cfg.hidden_dim, out_size, 1).to(device) # MLP with only 1 layer         
+        # model training
         log.info("Training...")
         
         acc = train(cfg, device, g, splits, model, num_classes, run)
         accs.append(acc)
 
+    # calculate mean and std of the accuracy
     mean_acc = torch.mean(torch.tensor(accs)).item()
     std_acc = torch.std(torch.tensor(accs)).item()
     print("mean_acc:", mean_acc)
