@@ -22,7 +22,7 @@ conda activate mm_bench2
 MODEL_LIST=('MLP' 'GCN' 'SAGE')
 
 # Declare feature types
-FEAT_LIST=('clip' 'clipimage' 'clipnonstruc' clipnonstruc')
+FEAT_LIST=('clip' 'clipimage' 'clipnonstruc' 'clipnonstruc')
 
 # Declare datasets
 DATASET_LIST=('Movies' 'Toys' 'Grocery' 'Arts' 'CD')
