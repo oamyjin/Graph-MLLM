@@ -1,3 +1,7 @@
+
+
+
+
 <p align="center">
   <a href="#Graph-MLLM">Overview</a> •
   <a href="#installation">Installation</a> •
@@ -12,14 +16,23 @@ Official code for ***Graph**-**MLLM**: Harnessing Multimodal Large Language Mode
 
 ## Overview of Graph-MLLM
 
-Graph-MLLM provides a fair and comprehensive platform for evaluating existing graph learning methods and facilitating future research on multimodal graph learning.
+Graph-MLLM provides a fair and comprehensive platform to evaluate existing graph learning methods and facilitate future research on multimodal graph learning.
 
-![graphmllm](https://github.com/oamyjin/Graph-MLLM/blob/main/docs/graphmllm.png)
-
-
+![graphmllm](https://github.com/oamyjin/Graph-MLLM/blob/main/docs/graphmllm.pdf)
 
 
-huggingface: https://huggingface.co/datasets/oamyjin/Graph-MLLM
+## Installation
 
+``` bash
+git clone https://github.com/oamyjin/Graph-MLLM.git
+```
 
-augmentor: base_model: vicuna-7b-v1.5-16k:https://huggingface.co/lmsys/vicuna-7b-v1.5-16k/tree/main
+**Installation for Enhancer:**
+``` bash
+cd Enhancer
+pip install -r requirement.txt
+```
+
+## 🚀Quick Start
+Here we shows a quick start to run Enhancer evalution.
+You can use the command `./Enhancer/run_all.sh` to run Enhancer on all datastets.
