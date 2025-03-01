@@ -156,29 +156,36 @@ Since this experiment involves two distinct baseline models, please follow their
 
 #### Step 2: Base Model Preparation
 Please download the following base models for baselines:
+
 - QWen-VL: We utilize the QWen-VL-Chat version as the predictor and its model can be found from [here](https://huggingface.co/Qwen/Qwen-VL-Chat). Please update download it and put it in the path: `QWen-VL/local_model`.
 - LLaVA: We also apply the LLaVA-v1.5-7B version as another predictor and its model can be downloaded from [here](https://huggingface.co/liuhaotian/llava-v1.5-7b). Please update it in the path:`LLaVA/local_model`.
 
 #### Step 3: Data Preparation
-Here, we prepare the prompt files of training and testing datasets on [huggingface](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset). 
+Here, we prepare the prompt files for training and testing datasets on [huggingface](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset). 
 Please download the processed dataset for evaluation and place the files into their corresponding dataset folders.
 
-- QWen-VL: 
-- LLaVA:
+- LLaVA: The testing dataset can be found [here](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset/llava). Please download it and put it in `../LLaVA/dataset`.
+- QWen-VL: The training dataset can be found [here](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset/qwen-vl/fintune_dataset). Please download it and put it in `../Qwen-VL/finetune/fintune_dataset` for finetuning. When evaluating the test dataset, QWen-VL uses the same data as LLaVA, but with different system prompt.
+
 
 #### Step 4: Run Evaluation
-For QWen-VL, we follow the official LoRA [training](https://github.com/QwenLM/Qwen-VL?tab=readme-ov-file#lora) finetuning instruction for supervised zero-shot and few-shot finetuning. 
-For a **quick start**, you can directly run the following commands for fine-tuning and evaluation:
-- QWen-VL:
-  ``` bash
-./Predictor/Qwen-VL/finetune/my_finetune_lora_single_gpu_nb_image_tiltle.sh
-./Predictor/Qwen-VL/eval_mm/mme/qwen_chat_eval.sh
-```
+For LLaVA, we perform zero-shot testing using the codebase without any fine-tuning. Here is the command for evaluation:
 
-For LLaVA, we directly conduct zero-shot testing with the code:
 ``` bash
 ./Predictor/LLaVA/graphmllm_scripts/train_eval_movies.sh
 ```
+
+For QWen-VL, we follow the official LoRA [training](https://github.com/QwenLM/Qwen-VL?tab=readme-ov-file#lora) finetuning instruction for supervised zero-shot and few-shot finetuning.
+
+For a **quick start**, you can directly run the following commands for fine-tuning and evaluation:
+
+- QWen-VL:
+  
+  ``` bash
+  ./Predictor/Qwen-VL/finetune/my_finetune_lora_single_gpu_nb_image_tiltle.sh
+  ./Predictor/Qwen-VL/eval_mm/mme/qwen_chat_eval.sh
+  ```
+
 
 ## Reference
 Our codes are implemented based on:
