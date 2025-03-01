@@ -35,4 +35,8 @@ pip install -r requirement.txt
 
 ## 🚀Quick Start
 Here we shows a quick start to run Enhancer evalution.
+<<<<<<< HEAD
 You can use the command `./Enhancer/run_all.sh` to run Enhancer on all datastets.
+=======
+You can use the command `./Enhancer/run_all.sh` to run Enhancer on all datastets.
+>>>>>>> origin/main
