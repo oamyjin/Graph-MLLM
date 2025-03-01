@@ -18,7 +18,7 @@ Official code for ***Graph**-**MLLM**: Harnessing Multimodal Large Language Mode
 
 Graph-MLLM provides a fair and comprehensive platform to evaluate existing graph learning methods and facilitate future research on multimodal graph learning.
 
-![graphmllm](https://github.com/oamyjin/Graph-MLLM/blob/main/docs/graphmllm.pdf)
+![graphmllm](https://github.com/oamyjin/Graph-MLLM/blob/main/docs/graphmllm.png)
 
 
 ## Installation
