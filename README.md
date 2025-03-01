@@ -16,7 +16,7 @@
 
 
 
-## Overview of Graph-MLLM
+## Overview
 
 Official code for ***Graph**-**MLLM**: Harnessing Multimodal Large Language Models for Multimodal **Graph** Learning*. 
 
