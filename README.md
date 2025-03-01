@@ -35,8 +35,10 @@ pip install -r requirement.txt
 
 ## 🚀Quick Start
 Here we shows a quick start to run Enhancer evalution.
-<<<<<<< HEAD
+
+**Update Dataset**
+You can find dataset from ![huggingface](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/enhancer-dataset)
+
+
+**Run Evaluation**
 You can use the command `./Enhancer/run_all.sh` to run Enhancer on all datastets.
-=======
-You can use the command `./Enhancer/run_all.sh` to run Enhancer on all datastets.
->>>>>>> origin/main
