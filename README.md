@@ -2,11 +2,7 @@
 <img src="https://github.com/oamyjin/Graph-MLLM/blob/main/docs/title.png" border="0" width=400px/>
 </div>
 
-
 ------
-
-
-
 <p align="center">
   <a href="#Graph-MLLM">Overview</a> •
   <a href="#installation">Installation</a> •
