@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/oamyjin/Graph-MLLM/blob/main/docs/title.png" border="0" width=600px/>
+<img src="https://github.com/oamyjin/Graph-MLLM/blob/main/docs/title.png" border="0" width=400px/>
 </div>
 
 
