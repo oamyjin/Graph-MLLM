@@ -14,7 +14,7 @@
 
 ## Overview
 
-Official code for ***Graph**-**MLLM**: Harnessing Multimodal Large Language Models for Multimodal **Graph** Learning*. 
+Official code for ***Graph**-**MLLM**: Harnessing Multimodal Large Language Models for Multimodal Graph Learning*. 
 
 Graph-MLLM is a comprehensive benchmark for multimodal graph learning that extends state-of-the-art graph methods into the multimodal domain using MLLMs. Fusing multimodal data with graph-structured data shows great promise for numerous real-world applications—such as social networks, healthcare, and recommendation systems—when nodes contain both textual and visual attributes.
 
