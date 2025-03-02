@@ -164,8 +164,11 @@ Please download the following base models for baselines:
 Here, we prepare the prompt files for training and testing datasets on [huggingface](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset). 
 Please download the processed dataset for evaluation and place the files into their corresponding dataset folders.
 
-- LLaVA: The testing dataset can be found [here](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset/llava). Please download it and put it in `../LLaVA/dataset`.
-- QWen-VL: The training dataset can be found [here](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset/qwen-vl/fintune_dataset). Please download it and put it in `../Qwen-VL/finetune/fintune_dataset` for finetuning. When evaluating the test dataset, QWen-VL uses the same data as LLaVA, but with different system prompt.
+- LLaVA: The testing dataset can be found [here](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset/llava). Please download it and put it in `.Predictor/LLaVA/dataset`.
+- QWen-VL: The training dataset can be found [here](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset/qwen-vl/fintune_dataset).
+  Please download it and put it in `./Predictor/Qwen-VL/finetune/fintune_dataset` for fine-tuning.
+  Please also download the evaluation [prompt files](https://huggingface.co/datasets/oamyjin/Graph-MLLM/tree/main/predictor-dataset/qwen-vl/eval_prompt) in `./Predictor/Qwen-VL/eval_mm/mme/eval_prompt_files`.
+  For other data in the testing dataset, QWen-VL uses the same as LLaVA, but with a different system prompt. 
 
 
 #### Step 4: Run Evaluation
