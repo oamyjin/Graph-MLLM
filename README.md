@@ -6,8 +6,8 @@
 <p align="center">
   <a href="#Graph-MLLM">Overview</a> •
   <a href="#installation">Installation</a> •
-  <a href="Evaluation">Evaluation</a> •
-  <a href="Reference">Reference</a>
+  <a href="#Evaluation">Evaluation</a> •
+  <a href="#Reference">Reference</a>
 </p>
 
 
