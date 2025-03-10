@@ -12,8 +12,7 @@ class CoraSemiDataset(Dataset):
         self.text = self.graph.raw_texts
         self.prompt = "Please predict the most appropriate category for the paper. Choose from the following categories:\nRule Learning\nNeural Networks\nCase Based\nGenetic Algorithms\nTheory\nReinforcement Learning\nProbabilistic Methods\n\nAnswer:"
         self.graph_type = 'Text Attributed Graph'
-        # feature_path = '/scratch/jl11523/graphprompter/dataset/cora/GIA.emb'
-        feature_path = '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/GIA.emb'
+        feature_path = '../../datasets/cora/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.num_features = 768
@@ -35,19 +34,16 @@ class CoraSemiDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        # return ['/scratch/jl11523/graphprompter/dataset/cora/processed_data.pt']
-        return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/processed_data.pt']
+        return ['../../datasets/cora/processed_data.pt']
 
     def get_idx_split(self):
-        # np_filename = f'/scratch/jl11523/graphprompter/dataset/split/semi_cora.npy'
-        np_filename = f'/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/split/semi_cora.npy'
+        np_filename = f'../../datasets/split/semi_cora.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]
         val_ids = [int(i) for i in loaded_data_dict['val']]
 
-        # sup_np_filename = f'/scratch/jl11523/graphprompter/dataset/split/sup_cora.npy'
-        sup_np_filename = f'/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/split/sup_cora.npy'
+        sup_np_filename = f'../../datasets/split/sup_cora.npy'
         loaded_data_dict = np.load(sup_np_filename, allow_pickle=True).item()
         test_ids = [int(i) for i in loaded_data_dict['test']]
 
@@ -73,8 +69,7 @@ class CoraSupDataset(Dataset):
         self.text = self.graph.raw_texts
         self.prompt = "Please predict the most appropriate category for the paper. Choose from the following categories:\nRule Learning\nNeural Networks\nCase Based\nGenetic Algorithms\nTheory\nReinforcement Learning\nProbabilistic Methods\n\nAnswer:"
         self.graph_type = 'Text Attributed Graph'
-        # feature_path = '/scratch/jl11523/graphprompter/dataset/cora/GIA.emb'
-        feature_path = '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/GIA.emb'
+        feature_path = '../../datasets/cora/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.num_features = 768
@@ -96,12 +91,10 @@ class CoraSupDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        # return ['/scratch/jl11523/graphprompter/dataset/cora/processed_data.pt']
-        return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/processed_data.pt']
+        return ['../../datasets/cora/processed_data.pt']
 
     def get_idx_split(self):
-        # np_filename = f'/scratch/jl11523/graphprompter/dataset/split/sup_cora.npy'
-        np_filename = f'/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/split/sup_cora.npy'
+        np_filename = f'../../datasets/split/sup_cora.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]

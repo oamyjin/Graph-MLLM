@@ -39,14 +39,12 @@ class GraphLLM(torch.nn.Module):
             "revision": "main",
         }
 
-        # self.tokenizer = AutoTokenizer.from_pretrained('/scratch/ys6310/graphprompter/Llama-2-7b-hf', use_fast=False, revision=kwargs["revision"])
-        self.tokenizer = AutoTokenizer.from_pretrained('/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/Llama-2-7b-hf', use_fast=False, revision=kwargs["revision"])
+        self.tokenizer = AutoTokenizer.from_pretrained('../../base_model/Llama-2-7b-hf', use_fast=False, revision=kwargs["revision"])
         self.tokenizer.pad_token_id = 0
         self.tokenizer.padding_side = 'left'
 
         model = AutoModelForCausalLM.from_pretrained(
-            # '/scratch/ys6310/graphprompter/Llama-2-7b-hf',
-            '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/Llama-2-7b-hf',
+            '../../base_model/Llama-2-7b-hf',
             torch_dtype=torch.bfloat16,
             low_cpu_mem_usage=True,
             **kwargs

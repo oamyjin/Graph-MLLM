@@ -40,11 +40,7 @@ class MoviesAugDataset(Dataset):
         self.prompt = f"Which category does the product seem to belong to? Choose from the following options: {candidates_str}.\n\nAnswer:"
         # pdb.set_trace()
         self.graph_type = 'Text Attributed Graph'
-        # feature_path = '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/GIA.emb'
-        # features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
-        # self.graph.x = features
-        # self.num_features = 768
-        # self.num_classes = 7
+        
         self.num_features = 768
         self.num_classes = 20
         print(f'label mapping: {self.graph.label_texts}')
@@ -65,11 +61,10 @@ class MoviesAugDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Movies_aug/Movies_Aug_graph_data.pt']
-        return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Movies_aug/Movies_Aug_struct_graph_data.pt']
+        return ['../../datasets/Movies/Movies_Aug_struct_graph_data.pt']
 
     def get_idx_split(self):    
-        json_path = "/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Movies/Movies_split.json"
+        json_path = "../../datasets/Movies/Movies_split.json"
         with open(json_path, 'r') as file:
             loaded_data_dict = json.load(file)
 

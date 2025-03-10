@@ -10,7 +10,7 @@ class SportsSemiDataset(Dataset):
 
         self.graph = torch.load(self.processed_file_names[0])
         self.text = self.graph.raw_texts
-        feature_path = '/scratch/jl11523/graphprompter/dataset/amazon-sports/GIA.emb'
+        feature_path = '../../datasets/amazon-sports/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.prompt = "\nQuestion: Please predict the most appropriate category for this product. Choose from the following categories: 'Other Sports', 'Golf', 'Hunting & Fishing', 'Exercise & Fitness', 'Team Sports', 'Accessories', 'Swimming', 'Leisure Sports & Game Room', 'Airsoft & Paintball', 'Boating & Sailing', 'Sports Medicine', 'Tennis & Racquet Sports', 'Clothing'? \n\nAnswer:"
@@ -34,16 +34,16 @@ class SportsSemiDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        return ['/scratch/jl11523/graphprompter/dataset/amazon-sports/processed_data.pt']
+        return ['../../datasets/amazon-sports/processed_data.pt']
 
     def get_idx_split(self):
-        np_filename = f'/scratch/jl11523/graphprompter/dataset/split/semi_amazon-sports.npy'
+        np_filename = f'../../datasets/split/semi_amazon-sports.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]
         val_ids = [int(i) for i in loaded_data_dict['val']]
         
-        sup_np_filename = f'/scratch/jl11523/graphprompter/dataset/split/sup_amazon-sports.npy'
+        sup_np_filename = f'../../datasets/split/sup_amazon-sports.npy'
         loaded_data_dict = np.load(sup_np_filename, allow_pickle=True).item()
         test_ids = [int(i) for i in loaded_data_dict['test']]
 
@@ -59,7 +59,7 @@ class SportsSupDataset(Dataset):
 
         self.graph = torch.load(self.processed_file_names[0])
         self.text = self.graph.raw_texts
-        feature_path = '/scratch/jl11523/graphprompter/dataset/amazon-sports/GIA.emb'
+        feature_path = '../../datasets/amazon-sports/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.prompt = "\nQuestion: Please predict the most appropriate category for this product. Choose from the following categories: 'Other Sports', 'Golf', 'Hunting & Fishing', 'Exercise & Fitness', 'Team Sports', 'Accessories', 'Swimming', 'Leisure Sports & Game Room', 'Airsoft & Paintball', 'Boating & Sailing', 'Sports Medicine', 'Tennis & Racquet Sports', 'Clothing'? \n\nAnswer:"
@@ -83,10 +83,10 @@ class SportsSupDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        return ['/scratch/jl11523/graphprompter/dataset/amazon-sports/processed_data.pt']
+        return ['../../datasets/amazon-sports/processed_data.pt']
 
     def get_idx_split(self):
-        np_filename = f'/scratch/jl11523/graphprompter/dataset/split/sup_amazon-sports.npy'
+        np_filename = f'../../datasets/split/sup_amazon-sports.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]

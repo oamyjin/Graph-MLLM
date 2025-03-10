@@ -29,7 +29,7 @@ def parse_args_llama():
 
     # LLM related
     parser.add_argument("--llm_model_name", type=str, default='7b')
-    parser.add_argument("--llm_model_path", type=str, default='/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/Llama-2-7b-hf')
+    parser.add_argument("--llm_model_path", type=str, default='../../base_model/Llama-2-7b-hf')
     parser.add_argument("--llm_frozen", type=str, default='True')
     parser.add_argument("--llm_num_virtual_tokens", type=int, default=10)
     parser.add_argument("--output_dir", type=str, default='output')

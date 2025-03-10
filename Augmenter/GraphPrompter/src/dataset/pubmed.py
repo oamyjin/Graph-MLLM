@@ -13,7 +13,7 @@ class PubmedSemiDataset(Dataset):
         self.text = self.graph.raw_texts
         self.prompt = "\nQuestion: Does the paper involve any cases of Type 1 diabetes, Type 2 diabetes, or Experimentally induced diabetes?\n\nAnswer:"
         self.graph_type = 'Text Attributed Graph'
-        feature_path = '/scratch/jl11523/graphprompter/dataset/pubmed/GIA.emb'
+        feature_path = '../../datasets/pubmed/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.num_features = 768
@@ -35,15 +35,15 @@ class PubmedSemiDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        return ['/scratch/jl11523/graphprompter/dataset/pubmed/processed_data.pt']
+        return ['../../datasets/pubmed/processed_data.pt']
 
     def get_idx_split(self):
-        np_filename = f'/scratch/jl11523/graphprompter/dataset/split/semi_pubmed.npy'
+        np_filename = f'../../datasets/split/semi_pubmed.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]
         val_ids = [int(i) for i in loaded_data_dict['val']]
-        sup_np_filename = f'/scratch/jl11523/graphprompter/dataset/split/sup_pubmed.npy'
+        sup_np_filename = f'../../datasets/split/sup_pubmed.npy'
         loaded_data_dict = np.load(sup_np_filename, allow_pickle=True).item()
         test_ids = [int(i) for i in loaded_data_dict['test']]
         print(f"Loaded data from {np_filename}: train_id length = {len(train_ids)}, test_id length = {len(test_ids)}, val_id length = {len(val_ids)}")
@@ -58,7 +58,7 @@ class PubmedSupDataset(Dataset):
         self.text = self.graph.raw_texts
         self.prompt = "\nQuestion: Does the paper involve any cases of Type 1 diabetes, Type 2 diabetes, or Experimentally induced diabetes?\n\nAnswer:"
         self.graph_type = 'Text Attributed Graph'
-        feature_path = '/scratch/jl11523/graphprompter/dataset/pubmed/GIA.emb'
+        feature_path = '../../datasets/pubmed/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.num_features = 768
@@ -80,10 +80,10 @@ class PubmedSupDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        return ['/scratch/jl11523/graphprompter/dataset/pubmed/processed_data.pt']
+        return ['../../datasets/pubmed/processed_data.pt']
 
     def get_idx_split(self):
-        np_filename = f'/scratch/jl11523/graphprompter/dataset/split/sup_pubmed.npy'
+        np_filename = f'../../datasets/split/sup_pubmed.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]

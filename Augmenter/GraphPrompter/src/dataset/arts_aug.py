@@ -25,36 +25,17 @@ class ArtsAugDataset(Dataset):
         self.graph = torch.load(self.processed_file_names[0])
         self.text = self.graph.raw_texts
         
-        # self.synthetic_summary = self.graph.synthetic_summary
-        # self.title_synthetic_summary = self.synthetic_summary
         
         self.title_synthetic_summary = self.graph.synthetic_summary
-        
-        # self.title_synthetic_summary = []
-        # for text, summary in zip(self.text, self.synthetic_summary):
-        #     # pdb.set_trace()
-        #     if "Title: " in text and "Description: " in text:
-        #         title_part, _ = text.split("; Description: ")
-        #         title = title_part.replace("Title: ", "").strip()
-        #         description = summary.strip()
-        #         new_text = f"Title: {title}; Description: {description}"
-        #         self.title_synthetic_summary.append(new_text)
-        
-        # self.prompt = "Please predict the most appropriate category for the paper. Choose from the following categories:\nRule Learning\nNeural Networks\nCase Based\nGenetic Algorithms\nTheory\nReinforcement Learning\nProbabilistic Methods\n\nAnswer:"
         
         candidates_str = ', '.join(candidates["Arts"])
         # if reddit: product -> post
         self.prompt = f"Which category does the product seem to belong to? Choose from the following options: {candidates_str}.\n\nAnswer:"
         # pdb.set_trace()
         self.graph_type = 'Text Attributed Graph'
-        # feature_path = '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/GIA.emb'
-        # features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
-        # self.graph.x = features
-        # self.num_features = 768
-        # self.num_classes = 7
         
         self.num_features = 768
-        # self.num_features = 768 * 2
+        
         self.num_classes = 7
         print(f'label mapping: {self.graph.label_texts}')
 
@@ -74,17 +55,11 @@ class ArtsAugDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_structure_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_non_structure_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_textImage_graph_data.pt']
-
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/structure_aware_emb/augmented-datasets/Arts_Aug_non_structure_graph_data.pt']
-        return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/structure_aware_emb/augmented-datasets/Arts_Aug_structure_graph_data.pt']
+        return ['../../datasets/Arts/Arts_Aug_structure_graph_data.pt']
     
 
     def get_idx_split(self):    
-        json_path = "/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_split.json"
+        json_path = "../../datasets/Arts/Arts_split.json"
         with open(json_path, 'r') as file:
             loaded_data_dict = json.load(file)
 

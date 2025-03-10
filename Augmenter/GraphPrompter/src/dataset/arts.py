@@ -31,11 +31,6 @@ class ArtsDataset(Dataset):
         self.prompt = f"Which category does the product seem to belong to? Choose from the following options: {candidates_str}.\n\nAnswer:"
         # pdb.set_trace()
         self.graph_type = 'Text Attributed Graph'
-        # feature_path = '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/GIA.emb'
-        # features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
-        # self.graph.x = features
-        # self.num_features = 768
-        # self.num_classes = 7
         
         # self.num_features = 768
         self.num_features = 768 * 2
@@ -57,17 +52,11 @@ class ArtsDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_structure_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_non_structure_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_textImage_graph_data.pt']
-        
         # concat
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/concat_embeddings/Arts_art_ori_text_aug_imgText_graph_data.pt']
-        return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/concat_embeddings/Arts_art_ori_text_aug_imgText_ori_img_graph_data.pt']
+        return ['../../datasets/Arts/Arts_art_ori_text_aug_imgText_ori_img_graph_data.pt']
 
     def get_idx_split(self):    
-        json_path = "/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/Arts/Arts_split.json"
+        json_path = "../../datasets/Arts/Arts_split.json"
         with open(json_path, 'r') as file:
             loaded_data_dict = json.load(file)
 

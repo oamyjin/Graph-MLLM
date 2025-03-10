@@ -35,13 +35,7 @@ class CDAugDataset(Dataset):
         self.prompt = f"Which category does the product seem to belong to? Choose from the following options: {candidates_str}.\n\nAnswer:"
         # pdb.set_trace()
         self.graph_type = 'Text Attributed Graph'
-        # feature_path = '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/GIA.emb'
-        # features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
-        # self.graph.x = features
-        # self.num_features = 768
-        # self.num_classes = 7
         
-        # self.num_features = 768
         self.num_features = 768 * 2
         self.num_classes = 15
         print(f'label mapping: {self.graph.label_texts}')
@@ -62,16 +56,10 @@ class CDAugDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/CD/CD_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/CD/CD_structure_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/CD/CD_non_structure_graph_data.pt']
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/CD/CD_textimage_graph_data.pt']
-        
-        # return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/structure_aware_emb/augmented-datasets/CD_Aug_Aug_structure_graph_data.pt']
-        return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/structure_aware_emb/augmented-datasets/CD_Aug_Aug_non_structure_graph_data.pt']
+        return ['../../datasets/CDs/CD_Aug_Aug_non_structure_graph_data.pt']
 
     def get_idx_split(self):    
-        json_path = "/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/CD/split.pt"
+        json_path = "../../datasets/CDs/CD_split.json"
         loaded_data_dict = torch.load(json_path)
 
         train_ids = [int(i) for i in loaded_data_dict['train_idx']]

@@ -13,7 +13,7 @@ class ArxivSupDataset(Dataset):
         self.text = self.graph.raw_texts
         self.prompt = "\nQuestion: Which arXiv CS sub-category does this paper belong to? Give your answer in the form \'cs.XX\'.\nAnswer: "
         self.graph_type = 'Text Attributed Graph'
-        feature_path = '/scratch/ys6310/graphprompter/dataset/ogbn-arxiv/GIA.emb'
+        feature_path = '../../datasets/ogbn-arxiv/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.num_features = 768
@@ -36,10 +36,10 @@ class ArxivSupDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        return ['/scratch/ys6310/graphprompter/dataset/ogbn-arxiv/processed_data.pt']
+        return ['../../datasets/ogbn-arxiv/processed_data.pt']
 
     def get_idx_split(self):
-        np_filename = f'/scratch/ys6310/graphprompter/dataset/split/sup_ogbn-arxiv.npy'
+        np_filename = f'../../datasets/split/sup_ogbn-arxiv.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]
@@ -58,7 +58,7 @@ class ArxivSemiDataset(Dataset):
         self.text = self.graph.raw_texts
         self.prompt = "\nQuestion: Which arXiv CS sub-category does this paper belong to? Give your answer in the form \'cs.XX\'.\nAnswer: "
         self.graph_type = 'Text Attributed Graph'
-        feature_path = '/scratch/ys6310/graphprompter/dataset/ogbn-arxiv/GIA.emb'
+        feature_path = '../../datasets/ogbn-arxiv/GIA.emb'
         features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
         self.graph.x = features
         self.num_features = 768
@@ -81,17 +81,17 @@ class ArxivSemiDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        return ['/scratch/ys6310/graphprompter/dataset/ogbn-arxiv/processed_data.pt']
+        return ['../../datasets/ogbn-arxiv/processed_data.pt']
 
     def get_idx_split(self):
-        np_filename = f'/scratch/ys6310/graphprompter/dataset/split/semi_ogbn-arxiv.npy'
+        np_filename = f'../../datasets/split/semi_ogbn-arxiv.npy'
         loaded_data_dict = np.load(np_filename, allow_pickle=True).item()
         # Convert the numpy arrays or non-Python int types to standard Python lists of int
         train_ids = [int(i) for i in loaded_data_dict['train']]
 
         val_ids = [int(i) for i in loaded_data_dict['val']]
 
-        sup_np_filename = f'/scratch/ys6310/graphprompter/dataset/split/sup_ogbn-arxiv.npy'
+        sup_np_filename = f'../../datasets/split/sup_ogbn-arxiv.npy'
         loaded_data_dict = np.load(sup_np_filename, allow_pickle=True).item()
         test_ids = [int(i) for i in loaded_data_dict['test']]
 

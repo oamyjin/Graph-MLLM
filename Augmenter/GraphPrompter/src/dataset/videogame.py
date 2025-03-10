@@ -33,11 +33,6 @@ class VideoGameDataset(Dataset):
         self.prompt = f"Which category does the product seem to belong to? Choose from the following options: {candidates_str}.\n\nAnswer:"
         # pdb.set_trace()
         self.graph_type = 'Text Attributed Graph'
-        # feature_path = '/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter_recompose/dataset/cora/GIA.emb'
-        # features = torch.from_numpy(smat_util.load_matrix(feature_path).astype(np.float32))
-        # self.graph.x = features
-        # self.num_features = 768
-        # self.num_classes = 7
         self.num_features = 768
         self.num_classes = 6
         print(f'label mapping: {self.graph.label_texts}')
@@ -57,10 +52,10 @@ class VideoGameDataset(Dataset):
 
     @property
     def processed_file_names(self) -> str:
-        return ['/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/VideoGames/VideoGame_graph_data.pt']
+        return ['../..datasets/VideoGames/VideoGame_graph_data.pt']
 
     def get_idx_split(self):    
-        json_path = "/gpfsnyu/scratch/ny2208/jch/graphprompter/dataset-csv/VideoGames/split.pt"
+        json_path = "../..datasets/VideoGames/split.pt"
         loaded_data_dict = torch.load(json_path)
 
         train_ids = [int(i) for i in loaded_data_dict['train_idx']]

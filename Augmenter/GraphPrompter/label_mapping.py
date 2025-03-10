@@ -15,26 +15,26 @@ def bump(g):
     return Data.from_dict(g.__dict__)
 def load_amazon_data(dataset_name, use_text=True, use_dgl=False, seed=0):
     if dataset_name == 'amazon-computers':
-        data_path = '/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Computers/Computers_Final_with_BoW_embeddings.pt'
-        file_path = "/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Computers/Computers.csv"
+        data_path = '../../datasets/Amazon-Computers/Computers_Final_with_BoW_embeddings.pt'
+        file_path = "../../datasets/Amazon-Computers/Computers.csv"
 
     elif dataset_name == 'amazon-photo':
-        data_path = '/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Photo/Photo_Final_with_BoW_embeddings.pt'
-        file_path = "/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Photo/Photo_Final.csv"
+        data_path = '../../datasets/Amazon-Photo/Photo_Final_with_BoW_embeddings.pt'
+        file_path = "../../datasets/Amazon-Photo/Photo_Final.csv"
 
     elif dataset_name == 'amazon-history':
-        data_path = '/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-History/History_Final_with_BoW_embeddings.pt'
-        file_path = "/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-History/History_Final.csv"
+        data_path = '../../datasets/Amazon-History/History_Final_with_BoW_embeddings.pt'
+        file_path = "../../datasets/Amazon-History/History_Final.csv"
     
     elif dataset_name == 'amazon-children':
-        data_path = '/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Children/Amazon-Books-Children.pt'
-        file_path = "/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Children/Children_Final.csv"
+        data_path = '../../datasets/Amazon-Children/Amazon-Books-Children.pt'
+        file_path = "../../datasets/Amazon-Children/Children_Final.csv"
 
     elif dataset_name == 'amazon-sports':
-        # data_path = '/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Fitness/Sports_Final_with_BoW_embeddings.pt'
-        # file_path = "/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Fitness/Sports_Final.csv"
-        data_path = '/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Fitness/Sports_Final_with_BoW_embeddings.pt'
-        file_path = "/gpfsnyu/scratch/jd5849/LLaGA/dataset/Amazon-Fitness/Sports_Final.csv"
+        # data_path = '../../datasets/Amazon-Fitness/Sports_Final_with_BoW_embeddings.pt'
+        # file_path = "../../datasets/Amazon-Fitness/Sports_Final.csv"
+        data_path = '../../datasets/Amazon-Fitness/Sports_Final_with_BoW_embeddings.pt'
+        file_path = "../../datasets/Amazon-Fitness/Sports_Final.csv"
 
     else:
         assert False, "no such amazon dataset"
@@ -142,8 +142,7 @@ def main():
     parser.add_argument('--dataset', type=str, required=True, help='Name of the dataset')
     args = parser.parse_args()
 
-    # data = torch.load(f'/scratch/ys6310/graphprompter/dataset/{args.dataset}/processed_data.pt')
-    data = torch.load(f'/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter/dataset/{args.dataset}/processed_data.pt')
+    data = torch.load(f'../../datasets/{args.dataset}/processed_data.pt')
     print(data.label_texts)
     if args.dataset == 'amazon-sports':
         data.label_texts = ['Other Sports', 'Golf', 'Hunting & Fishing', 'Exercise & Fitness', 'Team Sports', 'Accessories', 'Swimming', 'Leisure Sports & Game Room', 'Airsoft & Paintball', 'Boating & Sailing', 'Sports Medicine', 'Tennis & Racquet Sports', 'Clothing']
@@ -151,10 +150,8 @@ def main():
         data.label_texts = ['Computer Accessories & Peripherals', 'Tablet Accessories', 'Laptop Accessories', 'Computers & Tablets', 'Computer Components', 'Data Storage', 'Networking Products', 'Monitors', 'Servers', 'Tablet Replacement Parts']
     elif args.dataset == 'amazon-photo':
         data.label_texts = ['Video Surveillance', 'Accessories', 'Binoculars & Scopes', 'Video', 'Lighting & Studio', 'Bags & Cases', 'Tripods & Monopods', 'Flashes', 'Digital Cameras', 'Film Photography', 'Lenses', 'Underwater Photography']
-    # torch.save(data,f'/scratch/ys6310/graphprompter/dataset/{args.dataset}/processed_data.pt')
-    # data = torch.load(f'/scratch/ys6310/graphprompter/dataset/{args.dataset}/processed_data.pt')
-    torch.save(data,f'/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter/dataset/{args.dataset}/processed_data.pt')
-    data = torch.load(f'/gpfsnyu/scratch/ny2208/jch/graphprompter/graphprompter/dataset/{args.dataset}/processed_data.pt')
+    torch.save(data,f'../../datasets/{args.dataset}/processed_data.pt')
+    data = torch.load(f'../../datasets/{args.dataset}/processed_data.pt')
     print(data.label_texts)
     
     # pdb.set_trace()
